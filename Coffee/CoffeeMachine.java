@@ -105,26 +105,27 @@ static Scanner scan = new Scanner(System.in);
             System.out.println("\n -------------------------------- ");
             System.out.println("|1:     Status of Ingredient     |\n -------------------------------- \n|2:      Fill Ingredient         |\n -------------------------------- \n|3:       Clean Machine          |\n -------------------------------- \n|4:        Make Coffee           |\n -------------------------------- \n|5: How many Coffee We have made?|\n -------------------------------- \n|6:        Exit                  |");
             System.out.println(" -------------------------------- \n\n");
-            char c = CoffeeMachine.scan.next().charAt(0);
+            Scanner s=new Scanner(System.in);
+            int c = s.nextInt();
             switch(c){
-                case '1': 
+                case 1: 
                     System.out.println("------------- Status ------------");
                     this.GetIngredient();
                     System.out.println("---------------------------------");
                     break;
-                case '2':
+                case 2:
                     this.SetIngredient();
                     break;
-                case '3':
+                case 3:
                     this.CleanMachine();
                     break;
-                case '4':
+                case 4:
                     this.makecoffee();
                     break;
-                case '5':
+                case 5:
                     System.out.println("\nWe Have Made "+this.Coffee_Count+" Coffees.");
                     break;
-                case '6':
+                case 6:
                     System.out.println("\nExiting...\n");
                     t = false;
                     break;

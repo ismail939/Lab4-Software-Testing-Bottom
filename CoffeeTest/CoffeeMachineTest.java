@@ -201,22 +201,43 @@ class CoffeeMachineTest {
 	}
 	
 	@Test
-	void startTest12() {    
+	void startCase1Test12() {    
 		CoffeeMachine cm=new CoffeeMachine();
-		String expected="\n ------------------ \n";
-		expected+="|   Select Type:   |\n ------------------ \n| 1:  Black Coffee |\n| 2:  Milk Coffee  |\n| 0   to Discard   |\n";
-		expected+=" ------------------ \n\n";
-		expected+="\nAvailable Coffee Power(Gram) "+String.format("%.1f",cm.getcoffee_powder());
-		expected+="\nAvailable Milk(Liter) "+String.format("%.1f", cm.getMilk());
-		expected+="\nAvailable Water(Liter) "+String.format("%.1f", cm.getWater());
-		expected+="\n\nSome Iteams Are Not Available, Please Fill before Making Coffee.\n";
+		String expected=" ----------------------------------------------------------------\n"
+				+ "|                   Coffee Machine By Manikant                   |\n"
+				+ " ----------------------------------------------------------------\n"
+				+ "\n"
+				+ "Current Status: \n"
+				+ "Available Coffee Power(Gram) 0.0\n"
+				+ "Available Milk(Liter) 0.0\n"
+				+ "Available Water(Liter) 0.0\n"
+				+ "\n"
+				+ " -------------------------------- \n"
+				+ "|1:     Status of Ingredient     |\n"
+				+ " -------------------------------- \n"
+				+ "|2:      Fill Ingredient         |\n"
+				+ " -------------------------------- \n"
+				+ "|3:       Clean Machine          |\n"
+				+ " -------------------------------- \n"
+				+ "|4:        Make Coffee           |\n"
+				+ " -------------------------------- \n"
+				+ "|5: How many Coffee We have made?|\n"
+				+ " -------------------------------- \n"
+				+ "|6:        Exit                  |\n"
+				+ " -------------------------------- ";
+		expected+="------------- Status ------------\n";
+		expected += "Available Coffee Power(Gram) "+String.format("%.1f",cm.getcoffee_powder());
+		expected +="\nAvailable Milk(Liter) "+String.format("%.1f", cm.getMilk());
+		expected+= "\nAvailable Water(Liter) "+String.format("%.1f", cm.getWater());
+		expected+='\n'
+		+"---------------------------------\n";
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	    PrintStream printStream = new PrintStream(baos);
 	    System.setOut(printStream);
-		String userInput = "2";
+		String userInput = "1";
 		ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
 		System.setIn(bais);
-	    cm.makecoffee();
+	    cm.start();
 	    String actual = baos.toString();
 	    assertEquals(expected, actual, "Output is different than expected");
 	}
