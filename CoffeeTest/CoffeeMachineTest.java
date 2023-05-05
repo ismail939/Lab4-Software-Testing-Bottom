@@ -5,6 +5,7 @@ import java.io.*;
 
 import org.junit.jupiter.api.Test;
 
+
 import Coffee.CoffeeMachine;
 
 
@@ -224,23 +225,27 @@ class CoffeeMachineTest {
 				+ "|5: How many Coffee We have made?|\n"
 				+ " -------------------------------- \n"
 				+ "|6:        Exit                  |\n"
-				+ " -------------------------------- ";
+				+ " -------------------------------- \n\n\n";
 		expected+="------------- Status ------------\n";
 		expected += "Available Coffee Power(Gram) "+String.format("%.1f",cm.getcoffee_powder());
 		expected +="\nAvailable Milk(Liter) "+String.format("%.1f", cm.getMilk());
 		expected+= "\nAvailable Water(Liter) "+String.format("%.1f", cm.getWater());
-		expected+='\n'
-		+"---------------------------------\n";
+		expected+='\n';
+		expected+="---------------------------------\n";
+		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	    PrintStream printStream = new PrintStream(baos);
 	    System.setOut(printStream);
 		String userInput = "1";
 		ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
 		System.setIn(bais);
+		
 	    cm.start();
 	    String actual = baos.toString();
 	    assertEquals(expected, actual, "Output is different than expected");
 	}
+	
+	
 	
 	
 }
