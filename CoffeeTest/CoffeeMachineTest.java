@@ -295,5 +295,51 @@ class CoffeeMachineTest {
 	    assertEquals(expectedM, cm.getMilk(), "Output is wrong !!");
 	}
 	
-	
+	@Test
+	void startCase3Test14() {    
+		CoffeeMachine cm=new CoffeeMachine();
+		String expected=" ----------------------------------------------------------------\n"
+				+ "|                   Coffee Machine By Manikant                   |\n"
+				+ " ----------------------------------------------------------------\n"
+				+ "\n"
+				+ "Current Status: \n"
+				+ "Available Coffee Power(Gram) 0.0\n"
+				+ "Available Milk(Liter) 0.0\n"
+				+ "Available Water(Liter) 0.0\n"
+				+ "\n"
+				+ " -------------------------------- \n"
+				+ "|1:     Status of Ingredient     |\n"
+				+ " -------------------------------- \n"
+				+ "|2:      Fill Ingredient         |\n"
+				+ " -------------------------------- \n"
+				+ "|3:       Clean Machine          |\n"
+				+ " -------------------------------- \n"
+				+ "|4:        Make Coffee           |\n"
+				+ " -------------------------------- \n"
+				+ "|5: How many Coffee We have made?|\n"
+				+ " -------------------------------- \n"
+				+ "|6:        Exit                  |\n"
+				+ " -------------------------------- \n\n\n";
+		expected+="\nCleaning Machine...";
+		expected += "\nCleaning Completed.\n";
+		double expectedCP=0;
+	    double expectedW=0;
+	    double expectedM=0;
+	    
+	  
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	    PrintStream printStream = new PrintStream(baos);
+	    System.setOut(printStream);
+		String userInput = "3";
+		ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+		System.setIn(bais);
+		
+	    cm.start();
+	    String actual = baos.toString();
+	    
+	    assertEquals(expected, actual, "Output is different than expected");
+	    assertEquals(expectedCP, cm.getcoffee_powder(), "Output is wrong !!");
+	    assertEquals(expectedW, cm.getWater(), "Output is wrong !!");
+	    assertEquals(expectedM, cm.getMilk(), "Output is wrong !!");
+	}
 }
