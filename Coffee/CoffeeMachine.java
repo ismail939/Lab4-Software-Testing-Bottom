@@ -40,13 +40,17 @@ public static Scanner scan = new Scanner(System.in);
         this.water= 0;
         System.out.println("Cleaning Completed.");
     }
-    public void makecoffee(){  //Coffee Selection Menulllllllllllllllllllllllllllllllllllllllllllllllllllll
+    public void makecoffee(boolean check){  //Coffee Selection Menulllllllllllllllllllllllllllllllllllllllllllllllllllll
         System.out.println("\n ------------------ ");
         System.out.println("|   Select Type:   |\n ------------------ \n| 1:  Black Coffee |\n| 2:  Milk Coffee  |\n| 0   to Discard   |");
         System.out.println(" ------------------ \n");
+        
+        if(check) {
+        	this.BlackCoffee();
+        	return;
+        }
         Scanner s=new Scanner(System.in);
         int t = s.nextInt();
-        
         switch(t){
             case 1:
                 this.BlackCoffee();     //Call to BlackCoffee Method
@@ -93,7 +97,7 @@ public static Scanner scan = new Scanner(System.in);
             System.out.println("\nSome Iteams Are Not Available, Please Fill before Making Coffee.");
         }
     }
-    public void start(){    //public Start to accese all private method of this class
+    public void start(boolean check){    //public Start to accese all private method of this class
         System.out.println(" ----------------------------------------------------------------");
         System.out.println("|                   Coffee Machine By Manikant                   |");
         System.out.println(" ----------------------------------------------------------------");
@@ -122,7 +126,7 @@ public static Scanner scan = new Scanner(System.in);
                 this.CleanMachine();
                 break;
             case '4':
-                this.makecoffee();
+                this.makecoffee(check);
                 break;
             case '5':
                 System.out.println("\nWe Have Made "+this.Coffee_Count+" Coffees.");

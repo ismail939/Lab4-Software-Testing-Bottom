@@ -155,7 +155,7 @@ class CoffeeMachineTest {
 		String userInput = "0";
 		ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
 		System.setIn(bais);
-	    cm.makecoffee();
+	    cm.makecoffee(false);
 	    String actual = baos.toString();
 	    assertEquals(expected, actual, "Output is different than expected");
 	}
@@ -175,7 +175,7 @@ class CoffeeMachineTest {
 		String userInput = "1";
 		ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
 		System.setIn(bais);
-	    cm.makecoffee();
+	    cm.makecoffee(false);
 	    String actual = baos.toString();
 	    assertEquals(expected, actual, "Output is different than expected");
 	}
@@ -196,7 +196,7 @@ class CoffeeMachineTest {
 		String userInput = "2";
 		ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
 		System.setIn(bais);
-	    cm.makecoffee();
+	    cm.makecoffee(false);
 	    String actual = baos.toString();
 	    assertEquals(expected, actual, "Output is different than expected");
 	}
@@ -240,7 +240,7 @@ class CoffeeMachineTest {
 		ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
 		System.setIn(bais);
 		
-	    cm.start();
+	    cm.start(true);
 	    String actual = baos.toString();
 	    assertEquals(expected, actual, "Output is different than expected");
 	}
@@ -286,7 +286,7 @@ class CoffeeMachineTest {
 		ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
 		System.setIn(bais);
 		
-	    cm.start();
+	    cm.start(true);
 	    String actual = baos.toString();
 	    
 	    assertEquals(expected, actual, "Output is different than expected");
@@ -334,7 +334,7 @@ class CoffeeMachineTest {
 		ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
 		System.setIn(bais);
 		
-	    cm.start();
+	    cm.start(true);
 	    String actual = baos.toString();
 	    
 	    assertEquals(expected, actual, "Output is different than expected");
@@ -342,4 +342,53 @@ class CoffeeMachineTest {
 	    assertEquals(expectedW, cm.getWater(), "Output is wrong !!");
 	    assertEquals(expectedM, cm.getMilk(), "Output is wrong !!");
 	}
+	
+	@Test
+	void startCase4Test15() {    
+		CoffeeMachine cm=new CoffeeMachine();
+		String expected=" ----------------------------------------------------------------\n"
+				+ "|                   Coffee Machine By Manikant                   |\n"
+				+ " ----------------------------------------------------------------\n"
+				+ "\n"
+				+ "Current Status: \n"
+				+ "Available Coffee Power(Gram) 0.0\n"
+				+ "Available Milk(Liter) 0.0\n"
+				+ "Available Water(Liter) 0.0\n"
+				+ "\n"
+				+ " -------------------------------- \n"
+				+ "|1:     Status of Ingredient     |\n"
+				+ " -------------------------------- \n"
+				+ "|2:      Fill Ingredient         |\n"
+				+ " -------------------------------- \n"
+				+ "|3:       Clean Machine          |\n"
+				+ " -------------------------------- \n"
+				+ "|4:        Make Coffee           |\n"
+				+ " -------------------------------- \n"
+				+ "|5: How many Coffee We have made?|\n"
+				+ " -------------------------------- \n"
+				+ "|6:        Exit                  |\n"
+				+ " -------------------------------- \n\n\n";
+		expected+="\n ------------------ \n";
+		expected+="|   Select Type:   |\n ------------------ \n| 1:  Black Coffee |\n| 2:  Milk Coffee  |\n| 0   to Discard   |\n";
+		expected+=" ------------------ \n\n";
+		expected+="\nAvailable Coffee Power(Gram) "+String.format("%.1f",cm.getcoffee_powder());
+		expected+="\nAvailable Water(Liter) "+String.format("%.1f", cm.getWater());
+		expected+="\n\nSome Iteams Are Not Available, Please Fill before Making Coffee.\n";
+		
+	    
+	  
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	    PrintStream printStream = new PrintStream(baos);
+	    System.setOut(printStream);
+		String userInput = "4";
+		ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+		System.setIn(bais);
+		
+	    cm.start(true);
+	    String actual = baos.toString();
+	    
+	    assertEquals(expected, actual, "Output is different than expected");
+	    
+	}
+	
 }
