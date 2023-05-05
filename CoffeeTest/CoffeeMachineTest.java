@@ -163,12 +163,13 @@ class CoffeeMachineTest {
 	@Test
 	void MakeCoffeeCase1Test10() {    
 		CoffeeMachine cm=new CoffeeMachine();
+		cm.SetIngredient();
 		String expected="\n ------------------ \n";
 		expected+="|   Select Type:   |\n ------------------ \n| 1:  Black Coffee |\n| 2:  Milk Coffee  |\n| 0   to Discard   |\n";
 		expected+=" ------------------ \n\n";
-		expected+="\nAvailable Coffee Power(Gram) "+String.format("%.1f",cm.getcoffee_powder());
-		expected+="\nAvailable Water(Liter) "+String.format("%.1f", cm.getWater());
-		expected+="\n\nSome Iteams Are Not Available, Please Fill before Making Coffee.\n";
+		expected += "\nMaking Black Coffee...\n"+"\nTaking 10gm of Coffee Powder.\n"+"Taking 0.2 liter of Water.\n"+"\nYour Black Coffee is Ready.\n";
+		  
+		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	    PrintStream printStream = new PrintStream(baos);
 	    System.setOut(printStream);
@@ -469,5 +470,113 @@ class CoffeeMachineTest {
 	    cm.start(true);
 	    String actual = baos.toString();
 	    assertEquals(expected, actual, "Output is different than expected");
+	}
+	
+	@Test
+	void startcases2_4_6Test18() {    
+		CoffeeMachine cm=new CoffeeMachine();
+		String expected=" ----------------------------------------------------------------\n"
+				+ "|                   Coffee Machine By Manikant                   |\n"
+				+ " ----------------------------------------------------------------\n"
+				+ "\n"
+				+ "Current Status: \n"
+				+ "Available Coffee Power(Gram) 0.0\n"
+				+ "Available Milk(Liter) 0.0\n"
+				+ "Available Water(Liter) 0.0\n"
+				+ "\n"
+				+ " -------------------------------- \n"
+				+ "|1:     Status of Ingredient     |\n"
+				+ " -------------------------------- \n"
+				+ "|2:      Fill Ingredient         |\n"
+				+ " -------------------------------- \n"
+				+ "|3:       Clean Machine          |\n"
+				+ " -------------------------------- \n"
+				+ "|4:        Make Coffee           |\n"
+				+ " -------------------------------- \n"
+				+ "|5: How many Coffee We have made?|\n"
+				+ " -------------------------------- \n"
+				+ "|6:        Exit                  |\n"
+				+ " -------------------------------- \n\n\n";
+		expected+="\nFilling...";
+		expected += "\nFilling Completed.\n";
+		expected+=" ----------------------------------------------------------------\n"
+				+ "|                   Coffee Machine By Manikant                   |\n"
+				+ " ----------------------------------------------------------------\n"
+				+ "\n"
+				+ "Current Status: \n"
+				+ "Available Coffee Power(Gram) 500.0\n"
+				+ "Available Milk(Liter) 1.0\n"
+				+ "Available Water(Liter) 2.0\n"
+				+ "\n"
+				+ " -------------------------------- \n"
+				+ "|1:     Status of Ingredient     |\n"
+				+ " -------------------------------- \n"
+				+ "|2:      Fill Ingredient         |\n"
+				+ " -------------------------------- \n"
+				+ "|3:       Clean Machine          |\n"
+				+ " -------------------------------- \n"
+				+ "|4:        Make Coffee           |\n"
+				+ " -------------------------------- \n"
+				+ "|5: How many Coffee We have made?|\n"
+				+ " -------------------------------- \n"
+				+ "|6:        Exit                  |\n"
+				+ " -------------------------------- \n\n\n";
+		expected+="\n ------------------ \n";
+		expected+="|   Select Type:   |\n ------------------ \n| 1:  Black Coffee |\n| 2:  Milk Coffee  |\n| 0   to Discard   |\n";
+		expected+=" ------------------ \n\n";
+		expected += "\nMaking Black Coffee...\n"+"\nTaking 10gm of Coffee Powder.\n"+"Taking 0.2 liter of Water.\n"+"\nYour Black Coffee is Ready.\n";  
+		expected+=" ----------------------------------------------------------------\n"
+				+ "|                   Coffee Machine By Manikant                   |\n"
+				+ " ----------------------------------------------------------------\n"
+				+ "\n"
+				+ "Current Status: \n"
+				+ "Available Coffee Power(Gram) 490.0\n"
+				+ "Available Milk(Liter) 1.0\n"
+				+ "Available Water(Liter) 1.8\n"
+				+ "\n"
+				+ " -------------------------------- \n"
+				+ "|1:     Status of Ingredient     |\n"
+				+ " -------------------------------- \n"
+				+ "|2:      Fill Ingredient         |\n"
+				+ " -------------------------------- \n"
+				+ "|3:       Clean Machine          |\n"
+				+ " -------------------------------- \n"
+				+ "|4:        Make Coffee           |\n"
+				+ " -------------------------------- \n"
+				+ "|5: How many Coffee We have made?|\n"
+				+ " -------------------------------- \n"
+				+ "|6:        Exit                  |\n"
+				+ " -------------------------------- \n\n\n";
+		expected+="\nExiting...\n\n";
+		
+	    
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	    PrintStream printStream = new PrintStream(baos);
+	    System.setOut(printStream);
+		String userInput = "2";
+		ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+		System.setIn(bais);
+		
+	    cm.start(true);
+	    double expectedCP=cm.getcoffee_powder()-10;
+	    double expectedW=cm.getWater()-0.2;
+	    double expectedM=cm.getMilk();
+	    userInput = "4";
+		bais = new ByteArrayInputStream(userInput.getBytes());
+		System.setIn(bais);
+		
+	    cm.start(true);
+	    
+	    userInput = "6";
+		bais = new ByteArrayInputStream(userInput.getBytes());
+		System.setIn(bais);
+		
+	    cm.start(true);
+	    String actual = baos.toString();
+	    
+	    assertEquals(expected, actual, "Output is different than expected");
+	    assertEquals(expectedCP, cm.getcoffee_powder(), "Output is wrong !!");
+	    assertEquals(expectedW, cm.getWater(), "Output is wrong !!");
+	    assertEquals(expectedM, cm.getMilk(), "Output is wrong !!");
 	}
 }
